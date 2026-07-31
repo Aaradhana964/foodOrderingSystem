@@ -1,0 +1,113 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="orders-container">
+
+    <h1>My Orders</h1>
+
+
+    {% for order in orders %}
+
+    <div class="order-card">
+
+
+        <h3>
+            Order #{{ order.id }}
+        </h3>
+
+
+        <p>
+            Status:
+            <strong>{{ order.status }}</strong>
+        </p>
+
+
+        <div class="tracking">
+
+            {% for step in steps %}
+
+            <div class="step
+            {% if forloop.counter0 <= order.current_step %}
+                completed
+            {% endif %}
+
+            {% if step == order.status %}
+                active
+            {% endif %}
+            ">
+
+                <div class="circle">
+                    ✓
+                </div>
+
+                <p>{{ step }}</p>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+
+
+        <hr>
+
+
+        <h4>Items</h4>
+
+
+        {% for item in order.items.all %}
+
+        <div class="order-item">
+
+            <img src="{{ item.food.image.url }}" alt="{{ item.food.name }}">
+
+
+            <div>
+
+                <p>
+                    {{ item.food.name }}
+                </p>
+
+
+                <p>
+                    Quantity: {{ item.quantity }}
+                </p>
+
+
+                <p>
+                    ₹{{ item.price }}
+                </p>
+
+            </div>
+
+        </div>
+
+
+        {% endfor %}
+
+
+
+        <h3>
+            Total: ₹{{ order.total_amount }}
+        </h3>
+
+
+    </div>
+
+
+    {% empty %}
+
+    <p>
+        No orders found.
+    </p>
+
+
+    {% endfor %}
+
+
+</div>
+
+
+{% endblock %}

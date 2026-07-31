@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="auth-container">
+
+    <div class="auth-box">
+
+        <h1>Welcome Back 👋</h1>
+
+        <p>Login to continue ordering healthy food.</p>
+
+        {% if messages %}
+            {% for message in messages %}
+                <div class="message {{ message.tags }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+
+        <form method="POST">
+
+            {% csrf_token %}
+
+            {{ form.as_p }}
+
+            <button type="submit" class="btn">
+
+                Login
+
+            </button>
+
+        </form>
+
+        <p>
+
+            Don't have an account?
+
+            <a href="{% url 'register' %}">
+
+                Register
+
+            </a>
+
+        </p>
+
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+
+{% block title %}Checkout | NutriAI{% endblock %}
+
+{% block content %}
+
+<section class="checkout-page">
+
+    <div class="container">
+
+        <h1 class="section-title">🛍 Checkout</h1>
+
+        <p class="section-subtitle">
+            Complete your order by providing your delivery details.
+        </p>
+
+        <div class="checkout-container">
+
+            <!-- Delivery Form -->
+
+            <div class="checkout-left">
+
+                <h2>Delivery Information</h2>
+
+                <form method="POST">
+
+                    {% csrf_token %}
+
+                    {{ form.as_p }}
+
+                    <button type="submit" class="checkout-btn">
+                        ✅ Place Order
+                    </button>
+
+                </form>
+
+            </div>
+
+            <!-- Order Summary -->
+
+            <div class="checkout-right">
+
+                <h2>Order Summary</h2>
+
+                {% for id,item in cart.items %}
+
+                <div class="summary-item">
+
+                    <img src="{{ item.image }}" alt="{{ item.name }}">
+
+                    <div class="summary-info">
+
+                        <h4>{{ item.name }}</h4>
+
+                        <p>Quantity : {{ item.quantity }}</p>
+
+                    </div>
+
+                    <strong>
+                        ₹{{ item.subtotal }}
+                    </strong>
+
+                </div>
+
+                {% endfor %}
+
+                <hr>
+
+                <div class="total-row">
+
+                    <h3>Total</h3>
+
+                    <h2>₹{{ total }}</h2>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

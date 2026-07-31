@@ -1,0 +1,267 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}NutriAI | Home{% endblock %}
+
+{% block content %}
+
+<!-- ================= HERO ================= -->
+
+<section class="hero">
+
+    <div class="hero-left">
+
+        <span class="tag">🥗 Healthy • Fresh • Fast</span>
+
+        <h1>
+            Healthy Food
+            <br>
+            Delivered To
+            <span class="green-text">Your Door</span>
+        </h1>
+
+        <p>
+            Order delicious meals from nearby restaurants and receive
+            personalized AI-powered food recommendations based on your
+            health goals.
+        </p>
+
+        <div class="hero-buttons">
+            <a href="{% url 'menu' %}" class="btn">Order Now</a>
+            <a href="{% url 'recommend' %}" class="btn2">AI Recommendation</a>
+        </div>
+
+    </div>
+
+    <div class="hero-right">
+        <img src="{% static 'images/hero.jpg' %}" alt="Healthy Food">
+    </div>
+
+</section>
+
+<!-- ================= SEARCH ================= -->
+
+<section class="search-section">
+
+    <h2>Find Your Favorite Food</h2>
+
+    <form method="GET" action="{% url 'home' %}" class="search-box">
+
+        <input
+            type="text"
+            name="search"
+            placeholder="Search pizza, burger, salad, biryani..."
+        >
+
+        <button type="submit">Search</button>
+
+    </form>
+
+</section>
+
+<!-- ================= CATEGORIES ================= -->
+
+<section class="categories">
+
+    <h2>Browse by Category</h2>
+
+    <div class="category-container">
+
+        <a href="{% url 'menu' %}?category=Pizza" class="category-card">
+            <span>🍕</span>
+            <p>Pizza</p>
+        </a>
+
+        <a href="{% url 'menu' %}?category=Burger" class="category-card">
+            <span>🍔</span>
+            <p>Burger</p>
+        </a>
+
+        <a href="{% url 'menu' %}?category=Healthy" class="category-card">
+            <span>🥗</span>
+            <p>Healthy</p>
+        </a>
+
+        <a href="{% url 'menu' %}?category=Dessert" class="category-card">
+            <span>🍰</span>
+            <p>Dessert</p>
+        </a>
+
+        <a href="{% url 'menu' %}?category=Drinks" class="category-card">
+            <span>🥤</span>
+            <p>Drinks</p>
+        </a>
+
+        <a href="{% url 'menu' %}?category=Biryani" class="category-card">
+            <span>🍛</span>
+            <p>Biryani</p>
+        </a>
+
+    </div>
+
+</section>
+
+<!-- ================= POPULAR DISHES ================= -->
+
+<section class="popular-food">
+
+    <h2>Popular Dishes</h2>
+
+    <div class="food-container">
+
+        <div class="food-card">
+
+            <img src="/media/foods/pizza.jpg" alt="Pizza">
+
+            <div class="food-info">
+                <h3>Margherita Pizza</h3>
+                <p>Fresh mozzarella, basil & tomato sauce.</p>
+
+                <div class="price-row">
+                    <span class="price">₹299</span>
+                    <a href="{% url 'menu' %}" class="btn">Order</a>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="food-card">
+
+            <img src="/media/foods/burger.jpg" alt="Burger">
+
+            <div class="food-info">
+                <h3>Chicken Burger</h3>
+                <p>Juicy grilled chicken with cheese.</p>
+
+                <div class="price-row">
+                    <span class="price">₹199</span>
+                    <a href="{% url 'menu' %}" class="btn">Order</a>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="food-card">
+
+            <img src="/media/foods/salad.jpg" alt="Salad">
+
+            <div class="food-info">
+                <h3>Healthy Salad</h3>
+                <p>Fresh vegetables with healthy dressing.</p>
+
+                <div class="price-row">
+                    <span class="price">₹249</span>
+                    <a href="{% url 'menu' %}" class="btn">Order</a>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ================= FEATURED RESTAURANTS ================= -->
+
+<section class="featured-restaurants">
+
+    <h2>Featured Restaurants</h2>
+
+    <div class="restaurant-grid">
+
+        <div class="restaurant-card">
+            <img src="/media/foods/res1.jpg" alt="Pizza Hub">
+
+            <div class="restaurant-details">
+                <h2>Pizza Hub</h2>
+
+                <p><strong>⭐ 4.6</strong></p>
+
+                <p>📍 Jubilee Hills, Hyderabad</p>
+
+                <p>🍕 Italian, Pizza</p>
+
+                <p>🕒 10:00 AM - 11:00 PM</p>
+
+                <span class="open">Open</span>
+
+                <br><br>
+
+                <a href="{% url 'menu' %}" class="btn">
+                    View Menu
+                </a>
+            </div>
+        </div>
+
+        <div class="restaurant-card">
+            <img src="/media/foods/res2.jpg" alt="Burger Point">
+
+            <div class="restaurant-details">
+                <h2>Burger Point</h2>
+
+                <p><strong>⭐ 4.5</strong></p>
+
+                <p>📍 Madhapur, Hyderabad</p>
+
+                <p>🍔 Fast Food</p>
+
+                <p>🕒 11:00 AM - 11:30 PM</p>
+
+                <span class="open">Open</span>
+
+                <br><br>
+
+                <a href="{% url 'menu' %}" class="btn">
+                    View Menu
+                </a>  
+            </div>
+        </div>
+
+        <div class="restaurant-card">
+            <img src="/media/foods/res3.jpg" alt="Green Bowl">
+
+            <div class="restaurant-details">
+                <h2>Green Bowl</h2>
+
+                <p><strong>⭐ 4.7</strong></p>
+
+                <p>📍 Banjara Hills, Hyderabad</p>
+
+                <p>🥗 Healthy Food</p>
+
+                <p>🕒 8:00 AM - 9:00 PM</p>
+
+                <span class="open">Open</span>
+
+                <br><br>
+
+                <a href="{% url 'menu' %}" class="btn">View Menu</a>
+            </div>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ================= AI RECOMMENDATION ================= -->
+
+<section class="ai-section">
+
+    <div class="ai-content">
+
+        <h2>🤖 Smart AI Food Recommendation</h2>
+
+        <p>
+            Get personalized meal suggestions based on your health goals,
+            dietary preferences, and favorite cuisines.
+        </p>
+
+        <a href="{% url 'recommend' %}" class="btn">
+            Try AI Recommendation
+        </a>
+
+    </div>
+
+</section>
+
+{% endblock %}

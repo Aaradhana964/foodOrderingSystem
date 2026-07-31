@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="auth-container">
+
+    <div class="auth-box">
+
+        <h1>My Profile</h1>
+        <p>Manage your account information</p>
+
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            {% if user.profile_image and user.profile_image.name != "profiles/default.png" %}
+                <img src="{{ user.profile_image.url }}"
+                class="profile-img"
+                alt="Profile Image">
+            {% else %}
+                <img src="{% static 'images/default-profile.jpeg' %}"
+                class="profile-img"
+                alt="Default Profile">
+            {% endif %}
+            <label>Profile Image</label>
+            <input type="file" name="profile_image">
+
+            <label>First Name</label>
+            <input type="text"
+                   name="first_name"
+                   value="{{ user.first_name }}">
+
+            <label>Last Name</label>
+            <input type="text"
+                   name="last_name"
+                   value="{{ user.last_name }}">
+
+            <label>Username</label>
+            <input type="text"
+                   value="{{ user.username }}"
+                   readonly>
+
+            <label>Email</label>
+            <input type="email"
+                   name="email"
+                   value="{{ user.email }}">
+
+            <label>Phone</label>
+            <input type="text"
+                   name="phone"
+                   value="{{ user.phone }}">
+
+            <label>Address</label>
+            <textarea name="address">{{ user.address }}</textarea>
+
+            <button type="submit" class="btn">
+                Update Profile
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+{% endblock %}

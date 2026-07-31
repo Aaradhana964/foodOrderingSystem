@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Restaurants{% endblock %}
+
+{% block content %}
+
+<section class="restaurant-page">
+
+    <h1>Explore Restaurants</h1>
+
+    <div class="restaurant-grid">
+
+        {% for restaurant in restaurants %}
+
+        <div class="restaurant-card">
+
+            {% if restaurant.image %}
+                <img src="{{ restaurant.image.url }}" alt="{{ restaurant.name }}">
+            {% endif %}
+
+            <div class="restaurant-details">
+
+                <h2>{{ restaurant.name }}</h2>
+
+                <p>📍 {{ restaurant.location }}</p>
+
+                <p><strong>{{ restaurant.cuisine }}</strong></p>
+
+                <p>⭐ {{ restaurant.rating }}</p>
+
+                {% if restaurant.is_open %}
+                    <span class="open">🟢 Open</span>
+                {% else %}
+                    <span class="closed">🔴 Closed</span>
+                {% endif %}
+
+                <br><br>
+
+                <a href="{% url 'restaurant_detail' restaurant.id %}" class="btn">
+                    View Details
+                </a>
+
+            </div>
+
+        </div>
+
+        {% empty %}
+
+        <div class="empty-restaurants">
+            <h2>No Restaurants Available</h2>
+            <p>Please add restaurants from the admin panel.</p>
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</section>
+
+{% endblock %}

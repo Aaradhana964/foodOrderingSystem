@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ restaurant.name }}{% endblock %}
+
+{% block content %}
+
+<section class="restaurant-detail">
+
+    {% if restaurant.image %}
+        <img src="{{ restaurant.image.url }}" alt="{{ restaurant.name }}">
+    {% endif %}
+
+    <div class="detail-content">
+
+        <h1>{{ restaurant.name }}</h1>
+
+        <h3>{{ restaurant.cuisine }}</h3>
+
+        <p>{{ restaurant.description }}</p>
+
+        <p>⭐ {{ restaurant.rating }}</p>
+
+        <p>📍 {{ restaurant.location }}</p>
+
+        <p>
+            🕒 {{ restaurant.opening_time }} -
+            {{ restaurant.closing_time }}
+        </p>
+
+        {% if restaurant.is_open %}
+            <p class="open">🟢 Open Now</p>
+        {% else %}
+            <p class="closed">🔴 Closed</p>
+        {% endif %}
+
+        <a href="{% url 'menu' %}" class="btn">
+            Browse Menu
+        </a>
+
+    </div>
+
+</section>
+
+{% endblock %}

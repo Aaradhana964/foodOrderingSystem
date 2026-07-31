@@ -1,0 +1,111 @@
+{% extends 'base.html' %}
+
+{% block title %}AI Recommendation | NutriAI{% endblock %}
+
+{% block content %}
+
+<section class="recommend-page">
+
+    <div class="container">
+
+        <h1 class="section-title">
+            🤖 AI Meal Recommendation
+        </h1>
+
+        <p class="section-subtitle">
+            Get personalized meal suggestions based on your preferences.
+        </p>
+
+        <!-- Recommendation Form -->
+
+        <div class="recommend-card">
+
+            <form method="POST">
+
+                {% csrf_token %}
+
+                {{ form.as_p }}
+
+                <button type="submit" class="btn">
+                    🔍 Find Meals
+                </button>
+
+            </form>
+
+        </div>
+
+        <!-- Results -->
+
+        {% if foods %}
+
+        <h2 class="result-title">
+            Recommended Meals
+        </h2>
+
+        <div class="food-grid">
+
+            {% for food in foods %}
+
+            <div class="food-card">
+
+                {% if food.image %}
+                    <img src="{{ food.image.url }}" alt="{{ food.name }}">
+                {% endif %}
+
+                <div class="food-body">
+
+                    <h3>{{ food.name }}</h3>
+
+                    <p class="restaurant-name">
+                        🍽 {{ food.restaurant.name }}
+                    </p>
+
+                    <div class="food-meta">
+
+                        <span class="price">
+                            ₹{{ food.price }}
+                        </span>
+
+                        {% if food.is_veg %}
+                            <span class="veg">Veg</span>
+                        {% else %}
+                            <span class="nonveg">Non-Veg</span>
+                        {% endif %}
+
+                    </div>
+
+                    <div class="food-buttons">
+
+                        <a href="{% url 'food_detail' food.id %}" class="btn">
+                            View Details
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+        {% elif request.method == "POST" %}
+
+        <div class="empty-menu">
+
+            <h2>No Matching Meals</h2>
+
+            <p>
+                Try increasing your budget or selecting another cuisine.
+            </p>
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+</section>
+
+{% endblock %}

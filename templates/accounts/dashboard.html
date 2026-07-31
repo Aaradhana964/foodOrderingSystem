@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="dashboard-container">
+
+    <div class="dashboard-card">
+
+        <h1>Welcome, {{ request.user.username }} 👋</h1>
+
+        <p>This is your Dashboard.</p>
+
+        <div class="dashboard-actions">
+            <a href="{% url 'profile' %}" class="btn">View Profile</a>
+            <a href="{% url 'order_history' %}" class="btn">Orders</a>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

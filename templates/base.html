@@ -1,0 +1,141 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}NutriAI{% endblock %}</title>
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+
+<body>
+
+<!-- ================= NAVBAR ================= -->
+
+<header class="navbar">
+
+    <div class="logo">
+        <a href="{% url 'home' %}">
+            <img src="{% static 'images/logo.png' %}" alt="NutriAI Logo">
+        </a>
+        <h2>NutriAI</h2>
+    </div>
+
+    <nav>
+
+        <ul class="nav-links">
+
+            <li>
+                <a href="{% url 'home' %}">
+                    Home
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url 'restaurant_list' %}">
+                    Restaurants
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url 'menu' %}">
+                    Menu
+                </a>
+            </li>
+
+
+            {% if user.is_authenticated %}
+
+                <li>
+                    <a href="{% url 'wishlist' %}">
+                        Wishlist
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{% url 'cart' %}">
+                        Cart
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{% url 'order_history' %}">
+                        My Orders
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{% url 'profile' %}">
+                        Profile
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{% url 'logout' %}">
+                        Logout
+                    </a>
+                </li>
+
+
+            {% else %}
+
+                <li>
+                    <a href="{% url 'login' %}">
+                        Login
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{% url 'register' %}">
+                        Register
+                    </a>
+                </li>
+
+
+            {% endif %}
+
+
+        </ul>
+
+    </nav>
+
+</header>
+<!-- ================= MESSAGES ================= -->
+
+{% if messages %}
+<div class="container mt-2">
+    {% for message in messages %}
+        <div class="alert {{ message.tags }}">
+            {{ message }}
+        </div>
+    {% endfor %}
+</div>
+{% endif %}
+
+<!-- ================= MAIN CONTENT ================= -->
+
+<main>
+    {% block content %}
+    {% endblock %}
+</main>
+
+<!-- ================= FOOTER ================= -->
+
+<footer class="footer">
+
+    <div class="container">
+
+        <h3>NutriAI</h3>
+
+        <p>Eat Healthy • Live Better</p>
+
+        <p>&copy; 2026 NutriAI. All Rights Reserved.</p>
+
+    </div>
+
+</footer>
+
+</body>
+</html>

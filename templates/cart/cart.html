@@ -1,0 +1,109 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}My Cart | NutriAI{% endblock %}
+
+{% block content %}
+
+<section class="cart-page">
+
+    <div class="container">
+
+        <h1 class="section-title">🛒 My Shopping Cart</h1>
+
+        <p class="section-subtitle">
+            Review your selected meals before checkout.
+        </p>
+
+        {% if cart %}
+
+        <div class="cart-container">
+
+            <!-- Cart Items -->
+
+            <div class="cart-items">
+
+                {% for id,item in cart.items %}
+
+                <div class="cart-card">
+
+                    <img src="{{ item.image }}" alt="{{ item.name }}">
+
+                    <div class="cart-info">
+
+                        <h3>{{ item.name }}</h3>
+
+                        <p class="price">₹{{ item.price }}</p>
+
+                        <div class="quantity-box">
+
+                            <a href="{% url 'decrease' id %}" class="qty-btn">−</a>
+
+                            <span>{{ item.quantity }}</span>
+
+                            <a href="{% url 'increase' id %}" class="qty-btn">+</a>
+
+                        </div>
+
+                    </div>
+
+                    <div class="cart-total">
+
+                        <h3>₹{% widthratio item.price 1 item.quantity %}</h3>
+
+                        <a href="{% url 'remove_item' id %}" class="remove-btn">
+                            🗑 Remove
+                        </a>
+
+                    </div>
+
+                </div>
+
+                {% endfor %}
+
+            </div>
+
+            <!-- Order Summary -->
+
+            <div class="cart-summary">
+
+                <h2>Order Summary</h2>
+
+                <div class="summary-row">
+                    <span>Total Amount</span>
+                    <strong>₹{{ total }}</strong>
+                </div>
+
+                <a href="{% url 'checkout' %}" class="checkout-btn">
+                    Proceed to Checkout →
+                </a>
+
+            </div>
+
+        </div>
+
+        {% else %}
+
+        <div class="empty-cart">
+
+    <img src="{% static 'images/emptycart.jpg' %}"
+         alt="Empty Cart"
+         class="empty-cart-img">
+
+        <h2>Your Cart is Empty</h2>
+
+        <p>Add delicious meals to your cart and place your order.</p>
+
+        <a href="{% url 'menu' %}" class="btn">
+        Browse Menu
+        </a>
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+</section>
+
+{% endblock %}

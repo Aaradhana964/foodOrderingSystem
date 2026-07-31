@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ food.name }} | NutriAI{% endblock %}
+
+{% block content %}
+
+<section class="food-detail">
+
+    <div class="container">
+
+        <div class="food-detail-container">
+
+            <!-- Food Image -->
+
+            <div class="food-image">
+
+                {% if food.image %}
+                    <img src="{{ food.image.url }}" alt="{{ food.name }}">
+                {% else %}
+                    <img src="{% static 'images/no-food.jpg' %}" alt="No Image">
+                {% endif %}
+
+            </div>
+
+            <!-- Food Information -->
+
+            <div class="food-content">
+
+                <span class="food-category">
+                    {{ food.restaurant.name }}
+                </span>
+
+                <h1>{{ food.name }}</h1>
+
+                <div class="food-price">
+
+                    ₹{{ food.price }}
+
+                    {% if food.is_veg %}
+                        <span class="veg">🟢 Veg</span>
+                    {% else %}
+                        <span class="nonveg">🔴 Non-Veg</span>
+                    {% endif %}
+
+                </div>
+
+                <p class="food-description">
+                    {{ food.description }}
+                </p>
+
+                <div class="food-actions">
+
+                    <a href="{% url 'add_to_cart' food.id %}" class="btn">
+                        🛒 Add to Cart
+                    </a>
+
+                    <a href="{% url 'add_to_wishlist' food.id %}" class="btn-outline">
+                        ❤️ Wishlist
+                    </a>
+
+                </div>
+
+                <a href="{% url 'menu' %}" class="back-btn">
+                    ← Back to Menu
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

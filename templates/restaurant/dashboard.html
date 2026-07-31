@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block title %}
+
+Dashboard
+
+{% endblock %}
+
+{% block content %}
+
+<section class="dashboard">
+
+<h1>Restaurant Dashboard</h1>
+
+<div class="dashboard-cards">
+
+<div class="card">
+
+<h2>{{ restaurant_count }}</h2>
+
+<p>Restaurants</p>
+
+</div>
+
+<div class="card">
+
+<h2>{{ food_count }}</h2>
+
+<p>Food Items</p>
+
+</div>
+
+<div class="card">
+
+<h2>{{ order_count }}</h2>
+
+<p>Orders</p>
+
+</div>
+
+<div class="card">
+
+<h2>₹{{ revenue }}</h2>
+
+<p>Total Revenue</p>
+
+</div>
+
+</div>
+
+</section>
+
+{% endblock %}

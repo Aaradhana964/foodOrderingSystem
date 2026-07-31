@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}My Wishlist | NutriAI{% endblock %}
+
+{% block content %}
+
+<section class="wishlist-page">
+
+    <div class="container">
+
+        <h1 class="section-title">❤️ My Wishlist</h1>
+
+        <p class="section-subtitle">
+            Save your favorite meals and order them anytime.
+        </p>
+
+        {% if wishlist_items %}
+
+        <div class="wishlist-grid">
+
+            {% for wishlist in wishlist_items %}
+
+            <div class="wishlist-card">
+
+                {% if wishlist.food.image %}
+                    <img src="{{ wishlist.food.image.url }}" alt="{{ wishlist.food.name }}">
+                {% else %}
+                    <img src="{% static 'images/no-food.jpg' %}" alt="Food">
+                {% endif %}
+
+                <div class="wishlist-body">
+
+                    <h3>{{ wishlist.food.name }}</h3>
+
+                    <p class="restaurant-name">
+                        🍽 {{ wishlist.food.restaurant.name }}
+                    </p>
+
+                    <p class="price">
+                        ₹{{ wishlist.food.price }}
+                    </p>
+
+                    {% if wishlist.food.description %}
+                    <p class="description">
+                        {{ wishlist.food.description|truncatewords:18 }}
+                    </p>
+                    {% endif %}
+
+                    <div class="wishlist-buttons">
+
+                        <a href="{% url 'food_detail' wishlist.food.id %}" class="btn">
+                            View Details
+                        </a>
+
+                        <a href="{% url 'add_to_cart' wishlist.food.id %}" class="btn-outline">
+                            🛒 Cart
+                        </a>
+
+                    </div>
+
+                    <a href="{% url 'remove_from_wishlist' wishlist.food.id %}" class="remove-btn">
+                        🗑 Remove from Wishlist
+                    </a>
+
+                </div>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+        {% else %}
+
+        <div class="empty-state">
+
+        <h2>Your Wishlist is Empty ❤️</h2>
+
+        <p>
+            Browse our delicious meals and save your favorites.
+        </p>
+
+        <a href="{% url 'menu' %}" class="btn">
+            Explore Menu
+        </a>
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+</section>
+
+{% endblock %}

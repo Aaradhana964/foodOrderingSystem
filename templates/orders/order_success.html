@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Order Success | NutriAI
+{% endblock %}
+
+
+{% block content %}
+
+<section class="success-page">
+
+    <div class="success-card">
+
+        <h1>🎉 Order Placed Successfully!</h1>
+
+        <p>
+            Thank you for ordering from NutriAI.
+        </p>
+
+        <p>
+            Your delicious food will be delivered soon.
+        </p>
+
+
+        <a href="{% url 'menu' %}" class="btn">
+            Continue Shopping
+        </a>
+
+
+        <a href="{% url 'order_history' %}" class="btn-outline">
+            View Orders
+        </a>
+
+    </div>
+
+</section>
+
+{% endblock %}

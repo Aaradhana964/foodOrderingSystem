@@ -1,0 +1,127 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Menu | NutriAI{% endblock %}
+
+{% block content %}
+
+<section class="menu-page">
+
+    <div class="container">
+
+        <h1 class="section-title">Explore Our Menu</h1>
+        <p class="section-subtitle">
+            Discover healthy and delicious meals from our partner restaurants.
+        </p>
+
+        <!-- Search -->
+
+        <form method="GET" class="search-form">
+
+            <input
+                type="text"
+                name="search"
+                placeholder="Search for pizza, burger, biryani..."
+                value="{{ request.GET.search }}"
+            >
+
+            <button type="submit" class="btn">
+                Search
+            </button>
+
+        </form>
+
+        <!-- Categories -->
+
+        <div class="category-container">
+
+            <a href="{% url 'menu' %}" class="category-btn">
+                All
+            </a>
+
+            {% for category in categories %}
+
+            <a href="?category={{ category.name }}" class="category-btn">
+                {{ category.name }}
+            </a>
+
+            {% endfor %}
+
+        </div>
+
+        <!-- Food Grid -->
+
+        <div class="food-grid">
+
+            {% for food in foods %}
+
+            <div class="food-card">
+
+                {% if food.image %}
+                <img src="{{ food.image.url }}" alt="{{ food.name }}">
+                {% else %}
+                <img src="{% static 'images/no-food.jpg' %}" alt="Food">
+                {% endif %}
+
+                <div class="food-body">
+
+                    <h3>{{ food.name }}</h3>
+
+                    <p class="restaurant-name">
+                        🍽 {{ food.restaurant.name }}
+                    </p>
+
+                    <div class="food-meta">
+
+                        <span class="price">
+                            ₹{{ food.price }}
+                        </span>
+
+                        {% if food.is_veg %}
+                            <span class="veg">Veg</span>
+                        {% else %}
+                            <span class="nonveg">Non-Veg</span>
+                        {% endif %}
+
+                    </div>
+
+                    <div class="food-buttons">
+
+                        <a href="{% url 'food_detail' food.id %}" class="btn">
+                            View Details
+                        </a>
+
+                        <a href="{% url 'add_to_cart' food.id %}" class="btn-outline">
+                            Cart
+                        </a>
+
+                        <a href="{% url 'add_to_wishlist' food.id %}" class="wishlist-btn">
+                            Add to Wishlist
+                        </a>
+                    </div>
+
+                </div>
+
+            </div>
+
+            {% empty %}
+
+            <div class="empty-menu">
+
+                <h2>No Food Available</h2>
+
+                <p>
+                    Food items will appear here once they are added.
+                </p>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}
