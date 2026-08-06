@@ -27,7 +27,7 @@ class Food(models.Model):
 
     name = models.CharField(max_length=150)
 
-    image = models.ImageField(upload_to="foods/")
+    image = models.CharField(max_length=200)
 
     description = models.TextField()
 

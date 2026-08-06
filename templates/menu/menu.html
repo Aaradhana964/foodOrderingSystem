@@ -58,7 +58,7 @@
             <div class="food-card">
 
                 {% if food.image %}
-                <img src="{{ food.image.url }}" alt="{{ food.name }}">
+                <img src="{% static 'foods/' %}{{ food.image }}" alt="{{ food.name }}">
                 {% else %}
                 <img src="{% static 'images/no-food.jpg' %}" alt="Food">
                 {% endif %}
