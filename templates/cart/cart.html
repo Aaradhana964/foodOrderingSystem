@@ -15,43 +15,86 @@
             Review your selected meals before checkout.
         </p>
 
+
         {% if cart %}
 
         <div class="cart-container">
 
-            <!-- Cart Items -->
+            <!-- ================= CART ITEMS ================= -->
 
             <div class="cart-items">
 
-                {% for id,item in cart.items %}
+                {% for id, item in cart.items %}
 
                 <div class="cart-card">
 
-                    <img src="{{ item.image }}" alt="{{ item.name }}">
+                    <!-- ================= FOOD IMAGE ================= -->
+
+                    <div class="cart-image">
+
+                        {% if item.image %}
+
+                            <img src="{% static item.image %}"
+                                 alt="{{ item.name }}"
+                                 class="cart-food-image">
+
+                        {% else %}
+
+                            <img src="{% static 'images/no-food.jpg' %}"
+                                 alt="{{ item.name }}"
+                                 class="cart-food-image">
+
+                        {% endif %}
+
+                    </div>
+
+
+                    <!-- ================= FOOD INFORMATION ================= -->
 
                     <div class="cart-info">
 
-                        <h3>{{ item.name }}</h3>
+                        <h3>
+                            {{ item.name }}
+                        </h3>
 
-                        <p class="price">₹{{ item.price }}</p>
+                        <p class="price">
+                            ₹{{ item.price }}
+                        </p>
+
+
+                        <!-- Quantity -->
 
                         <div class="quantity-box">
 
-                            <a href="{% url 'decrease' id %}" class="qty-btn">−</a>
+                            <a href="{% url 'decrease' id %}"
+                               class="qty-btn">
+                                −
+                            </a>
 
-                            <span>{{ item.quantity }}</span>
+                            <span class="quantity">
+                                {{ item.quantity }}
+                            </span>
 
-                            <a href="{% url 'increase' id %}" class="qty-btn">+</a>
+                            <a href="{% url 'increase' id %}"
+                               class="qty-btn">
+                                +
+                            </a>
 
                         </div>
 
                     </div>
 
+
+                    <!-- ================= ITEM TOTAL ================= -->
+
                     <div class="cart-total">
 
-                        <h3>₹{% widthratio item.price 1 item.quantity %}</h3>
+                        <h3>
+                            ₹{% widthratio item.price 1 item.quantity %}
+                        </h3>
 
-                        <a href="{% url 'remove_item' id %}" class="remove-btn">
+                        <a href="{% url 'remove_item' id %}"
+                           class="remove-btn">
                             🗑 Remove
                         </a>
 
@@ -63,18 +106,29 @@
 
             </div>
 
-            <!-- Order Summary -->
+
+            <!-- ================= ORDER SUMMARY ================= -->
 
             <div class="cart-summary">
 
-                <h2>Order Summary</h2>
+                <h2>
+                    Order Summary
+                </h2>
 
                 <div class="summary-row">
-                    <span>Total Amount</span>
-                    <strong>₹{{ total }}</strong>
+
+                    <span>
+                        Total Amount
+                    </span>
+
+                    <strong>
+                        ₹{{ total }}
+                    </strong>
+
                 </div>
 
-                <a href="{% url 'checkout' %}" class="checkout-btn">
+                <a href="{% url 'checkout' %}"
+                   class="checkout-btn">
                     Proceed to Checkout →
                 </a>
 
@@ -82,21 +136,29 @@
 
         </div>
 
+
         {% else %}
+
+        <!-- ================= EMPTY CART ================= -->
 
         <div class="empty-cart">
 
-    <img src="{% static 'images/emptycart.jpg' %}"
-         alt="Empty Cart"
-         class="empty-cart-img">
+            <img src="{% static 'images/emptycart.jpg' %}"
+                 alt="Empty Cart"
+                 class="empty-cart-img">
 
-        <h2>Your Cart is Empty</h2>
+            <h2>
+                Your Cart is Empty
+            </h2>
 
-        <p>Add delicious meals to your cart and place your order.</p>
+            <p>
+                Add delicious meals to your cart and place your order.
+            </p>
 
-        <a href="{% url 'menu' %}" class="btn">
-        Browse Menu
-        </a>
+            <a href="{% url 'menu' %}"
+               class="btn">
+                Browse Menu
+            </a>
 
         </div>
 

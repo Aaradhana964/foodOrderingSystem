@@ -3,7 +3,6 @@ from apps.menu.models import Food
 
 
 def add_to_cart(request, food_id):
-
     food = get_object_or_404(Food, id=food_id)
 
     cart = request.session.get("cart", {})
@@ -11,16 +10,17 @@ def add_to_cart(request, food_id):
     food_id = str(food.id)
 
     if food_id in cart:
-        cart[food_id]["quantity"] += 1
+        cart[food_id]["quantity"] = int(cart[food_id]["quantity"]) + 1
     else:
         cart[food_id] = {
             "name": food.name,
             "price": float(food.price),
-            "image": food.image.url,
+            "image": food.image,
             "quantity": 1,
         }
 
     request.session["cart"] = cart
+    request.session.modified = True
 
     return redirect("cart")
 def cart(request):

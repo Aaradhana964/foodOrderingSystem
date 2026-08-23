@@ -23,12 +23,27 @@
 
             <div class="wishlist-card">
 
-                {% if wishlist.food.image %}
-                    <img src="{{ wishlist.food.image.url }}" alt="{{ wishlist.food.name }}">
-                {% else %}
-                    <img src="{% static 'images/no-food.jpg' %}" alt="Food">
-                {% endif %}
+                <!-- Food Image -->
+                <div class="wishlist-image">
 
+                    {% if wishlist.food.image %}
+
+                        <img src="{% static wishlist.food.image %}"
+                             alt="{{ wishlist.food.name }}"
+                             class="wishlist-food-image">
+
+                    {% else %}
+
+                        <img src="{% static 'images/no-food.jpg' %}"
+                             alt="Food"
+                             class="wishlist-food-image">
+
+                    {% endif %}
+
+                </div>
+
+
+                <!-- Wishlist Content -->
                 <div class="wishlist-body">
 
                     <h3>{{ wishlist.food.name }}</h3>
@@ -42,24 +57,31 @@
                     </p>
 
                     {% if wishlist.food.description %}
+
                     <p class="description">
                         {{ wishlist.food.description|truncatewords:18 }}
                     </p>
+
                     {% endif %}
+
 
                     <div class="wishlist-buttons">
 
-                        <a href="{% url 'food_detail' wishlist.food.id %}" class="btn">
+                        <a href="{% url 'food_detail' wishlist.food.id %}"
+                           class="btn">
                             View Details
                         </a>
 
-                        <a href="{% url 'add_to_cart' wishlist.food.id %}" class="btn-outline">
+                        <a href="{% url 'add_to_cart' wishlist.food.id %}"
+                           class="btn-outline">
                             🛒 Cart
                         </a>
 
                     </div>
 
-                    <a href="{% url 'remove_from_wishlist' wishlist.food.id %}" class="remove-btn">
+
+                    <a href="{% url 'remove_from_wishlist' wishlist.food.id %}"
+                       class="remove-btn">
                         🗑 Remove from Wishlist
                     </a>
 
@@ -71,19 +93,20 @@
 
         </div>
 
+
         {% else %}
 
         <div class="empty-state">
 
-        <h2>Your Wishlist is Empty ❤️</h2>
+            <h2>Your Wishlist is Empty ❤️</h2>
 
-        <p>
-            Browse our delicious meals and save your favorites.
-        </p>
+            <p>
+                Browse our delicious meals and save your favorites.
+            </p>
 
-        <a href="{% url 'menu' %}" class="btn">
-            Explore Menu
-        </a>
+            <a href="{% url 'menu' %}" class="btn">
+                Explore Menu
+            </a>
 
         </div>
 
